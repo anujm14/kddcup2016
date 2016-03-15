@@ -19,7 +19,7 @@ CONFERENCES_FILE='./KDDConferences.txt'
 RANKINGS_FILE='./Rankings.txt'
 
 affiliations = pandas.DataFrame.from_csv(AFFILIATIONS_FILE, sep='\t')
-# conferences = pandas.DataFrame.from_csv(CONFERENCES_FILE, sep='\t')
+conferences = pandas.DataFrame.from_csv(CONFERENCES_FILE, sep='\t')
 
 print(affiliations)
-# print(conferences)
+print(conferences)
