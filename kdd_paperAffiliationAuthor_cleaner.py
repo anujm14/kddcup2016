@@ -3,6 +3,11 @@
 import csv
 import urllib2
 
+# SEE url below for data and schemas:
+"""
+https://academicgraph.blob.core.windows.net/graph-2016-02-05/index.html
+"""
+
 PAA_FILE='./PaperAuthorAffiliations.txt'
 PAA_FILE_URL='./Papers.txt'  ### Update me 
 
