@@ -17,9 +17,32 @@ def probability_score(conference_id, affiliation_id):
 AFFILIATIONS_FILE='./KDDAffiliations.txt'
 CONFERENCES_FILE='./KDDConferences.txt'
 RANKINGS_FILE='./Rankings.txt'
+RESULTS_FILE='./results.tsv'
+SIGMOD_ID='460A7036'
+SIGIR_ID='43FD776C'
+SIGCOMM_ID='44B13001'
 
-affiliations = pandas.DataFrame.from_csv(AFFILIATIONS_FILE, sep='\t')
-conferences = pandas.DataFrame.from_csv(CONFERENCES_FILE, sep='\t')
+affiliations = pandas.read_csv(AFFILIATIONS_FILE, sep='\t', names=['affiliation_id', 'affiliation_name'])
+conferences = pandas.read_csv(CONFERENCES_FILE, sep='\t', names=['conference_id', 'short_name', 'conference_name'])
 
-print(affiliations)
-print(conferences)
+sigmod = pandas.DataFrame(columns=('conference_id','affiliation_id','probability_score'))
+
+sigmod['affiliation_id'] = affiliations['affiliation_id']
+sigmod['conference_id'] = sigmod['conference_id'].fillna(SIGMOD_ID)
+sigmod['probability_score'] = sigmod['affiliation_id'].apply(lambda x: probability_score(x,SIGMOD_ID))
+
+sigir = pandas.DataFrame(columns=('conference_id','affiliation_id','probability_score'))
+
+sigir['affiliation_id'] = affiliations['affiliation_id']
+sigir['conference_id'] = sigmod['conference_id'].fillna(SIGIR_ID)
+sigir['probability_score'] = sigmod['affiliation_id'].apply(lambda x: probability_score(x,SIGIR_ID))
+
+sigcomm = pandas.DataFrame(columns=('conference_id','affiliation_id','probability_score'))
+
+sigcomm['affiliation_id'] = affiliations['affiliation_id']
+sigcomm['conference_id'] = sigmod['conference_id'].fillna(SIGCOMM_ID)
+sigcomm['probability_score'] = sigmod['affiliation_id'].apply(lambda x: probability_score(x,SIGCOMM_ID))
+
+frames = [sigmod, sigir, sigcomm]
+result = pandas.concat(frames)
+result.to_csv(RESULTS_FILE,sep='\t', header=False, index=False)
