@@ -1,15 +1,17 @@
+require 'rubygems'
+require 'open-uri'
 require 'csv'
 
-KDD_PAPERS_TSV = Rails.root.join 'lib', 'seeds', 'Papers.tsv'
-KDD_AFFILIATIONS_TSV = Rails.root.join 'lib', 'seeds', 'Affiliations.tsv'
-KDD_AUTHORS_TSV = Rails.root.join 'lib', 'seeds', 'Authors.tsv'
+KDD_PAPERS_TSV = 'https://s3.amazonaws.com/kddcup2016-ghen/Papers.tsv'
+KDD_AFFILIATIONS_TSV = 'https://s3.amazonaws.com/kddcup2016-ghen/Affiliations.tsv'
+KDD_AUTHORS_TSV = 'https://s3.amazonaws.com/kddcup2016-ghen/Authors.tsv'
 
 progress = ProgressBar.create \
     title: "building papers from #{KDD_PAPERS_TSV}",
-    total: File.open(KDD_PAPERS_TSV).readlines.size,
+    total: 3677,
     output: Rails.env.test? ? StringIO.new : STDOUT
 
-CSV.foreach(KDD_PAPERS_TSV.to_s, { :col_sep => "\t" }).with_index do |row, i|
+CSV.foreach(open(KDD_PAPERS_TSV), { :col_sep => "\t" }).with_index do |row, i|
   attrs = { paper_id:  row[0],
             title:  row[1],
             publish_year: row[2],
@@ -24,10 +26,10 @@ progress.finish
 
 progress = ProgressBar.create \
     title: "building affiliations from #{KDD_AFFILIATIONS_TSV}",
-    total: File.open(KDD_AFFILIATIONS_TSV).readlines.size,
+    total: 741,
     output: Rails.env.test? ? StringIO.new : STDOUT
 
-CSV.foreach(KDD_AFFILIATIONS_TSV.to_s, { :col_sep => "\t" }).with_index do |row, i|
+CSV.foreach(open(KDD_AFFILIATIONS_TSV), { :col_sep => "\t" }).with_index do |row, i|
   attrs = { affiliation_id:  row[0],
             name:  row[1] }
 
@@ -42,7 +44,8 @@ progress = ProgressBar.create \
     total: 114698044, # NOTE save some time...
     output: Rails.env.test? ? StringIO.new : STDOUT
 
-CSV.foreach(KDD_AUTHORS_TSV.to_s, { :col_sep => "\t" }).with_index do |row, i|
+CSV.foreach(open(KDD_AUTHORS_TSV), { :col_sep => "\t" }).with_index do |row, i|
+  puts row
   attrs = { author_id:  row[0],
             name:  row[1] }
 
