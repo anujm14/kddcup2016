@@ -12,7 +12,7 @@ def probability_score(conference_id, affiliation_id):
     and affiliation_id pair gets the same probability_score by seeding random
     """
     random.seed(conference_id + affiliation_id)
-    return random.uniform(0,1)
+    return str(random.uniform(0,1))[0:9]
 
 AFFILIATIONS_FILE='./KDDAffiliations.txt'
 CONFERENCES_FILE='./KDDConferences.txt'
@@ -34,15 +34,15 @@ sigmod['probability_score'] = sigmod['affiliation_id'].apply(lambda x: probabili
 sigir = pandas.DataFrame(columns=('conference_id','affiliation_id','probability_score'))
 
 sigir['affiliation_id'] = affiliations['affiliation_id']
-sigir['conference_id'] = sigmod['conference_id'].fillna(SIGIR_ID)
-sigir['probability_score'] = sigmod['affiliation_id'].apply(lambda x: probability_score(x,SIGIR_ID))
+sigir['conference_id'] = sigir['conference_id'].fillna(SIGIR_ID)
+sigir['probability_score'] = sigir['affiliation_id'].apply(lambda x: probability_score(x,SIGIR_ID))
 
 sigcomm = pandas.DataFrame(columns=('conference_id','affiliation_id','probability_score'))
 
 sigcomm['affiliation_id'] = affiliations['affiliation_id']
-sigcomm['conference_id'] = sigmod['conference_id'].fillna(SIGCOMM_ID)
-sigcomm['probability_score'] = sigmod['affiliation_id'].apply(lambda x: probability_score(x,SIGCOMM_ID))
+sigcomm['conference_id'] = sigcomm['conference_id'].fillna(SIGCOMM_ID)
+sigcomm['probability_score'] = sigcomm['affiliation_id'].apply(lambda x: probability_score(x,SIGCOMM_ID))
 
 frames = [sigmod, sigir, sigcomm]
 result = pandas.concat(frames)
-result.to_csv(RESULTS_FILE,sep='\t', header=False, index=False)
+result.to_csv(RESULTS_FILE, sep='\t', header=False, index=False)

@@ -1,15 +1,12 @@
 # Get the relevant KDD Papers
+# SEE url below for data and schemas:
+# https://academicgraph.blob.core.windows.net/graph-2016-02-05/index.html
 
 import csv
 import urllib2
 
-# SEE url below for data and schemas:
-"""
-https://academicgraph.blob.core.windows.net/graph-2016-02-05/index.html
-"""
-
 PAA_FILE='./PaperAuthorAffiliations.txt'
-PAA_FILE_URL='./Papers.txt'  ### Update me 
+PAA_FILE_URL='./Papers.txt'  ### Update me
 
 # PAA FORMAT:
 """
@@ -40,9 +37,9 @@ useInternet = False
 
 ### This isn't even close to working or being tested
 if useInternet:
-    data = urllib2.urlopen(KDD_PAPERS_FILE_URL) 
+    data = urllib2.urlopen(KDD_PAPERS_FILE_URL)
     tsvdata = csv.reader(infile, delimiter='\t')
-       
+
 
 ### Requires that you have a 25GB file hanging out in local storage...
 if not useInternet:
