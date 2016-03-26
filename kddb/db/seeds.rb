@@ -1,6 +1,7 @@
 require 'csv'
 
 KDD_PAPERS_TSV = Rails.root.join 'lib', 'seeds', 'Papers.tsv'
+KDD_AFFILIATIONS_TSV = Rails.root.join 'lib', 'seeds', 'Affiliations.tsv'
 
 # progress = ProgressBar.create \
 #     title: "building papers from #{csv}",
@@ -17,4 +18,13 @@ CSV.foreach(KDD_PAPERS_TSV.to_s, { :col_sep => "\t" }).with_index do |row, i|
   paper = Paper.new attrs
   paper.save
   puts "Saved", paper
+end
+
+CSV.foreach(KDD_AFFILIATIONS_TSV.to_s, { :col_sep => "\t" }).with_index do |row, i|
+  attrs = { affiliation_id:  row[0],
+            name:  row[1] }
+
+  affiliation = Affiliation.new attrs
+  affiliation.save
+  puts "Saved", affiliation
 end
