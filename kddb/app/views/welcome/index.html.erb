@@ -1,0 +1,15 @@
+<h1>Hello, Rails!</h1>
+<table>
+  <tr>
+    <th>Paper</th>
+    <th>Author</th>
+    <th>Affiliation</th>
+  </tr>
+  <% @papers_authors_affiliations.each do |paa| %>
+    <tr>
+      <td><%= paa.paper.title %></td>
+      <td><%= paa.author.name %></td>
+      <td><%= paa.affiliation.name %></td>
+    </tr>
+  <% end %>
+</table>
