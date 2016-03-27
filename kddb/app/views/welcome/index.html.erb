@@ -1,15 +1,21 @@
-<h1>Hello, Rails!</h1>
-<table>
+<h1>KDD Cup Rankings</h1>
+<h2>Working in progress</h2>
+<h3>Team Titans</h3>
+<table class="table">
   <tr>
+    <th>Conference</th>
     <th>Paper</th>
     <th>Author</th>
     <th>Affiliation</th>
+    <th>Paper Affiliation Score</th>
   </tr>
   <% @papers_authors_affiliations.each do |paa| %>
     <tr>
+      <td><%= paa.paper.conference_abbrv %></td>
       <td><%= paa.paper.title %></td>
       <td><%= paa.author.name %></td>
       <td><%= paa.affiliation.name %></td>
+      <td>?</td>
     </tr>
   <% end %>
 </table>
