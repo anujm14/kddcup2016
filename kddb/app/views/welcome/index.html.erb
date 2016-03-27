@@ -1,21 +1,31 @@
-<h1>KDD Cup Rankings</h1>
+
+<h1>KDD Cup Data</h1>
 <h2>Working in progress</h2>
 <h3>Team Titans</h3>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 <table class="table">
   <tr>
     <th>Conference</th>
+    <th>Year</th>
     <th>Paper</th>
     <th>Author</th>
     <th>Affiliation</th>
-    <th>Paper Affiliation Score</th>
+    <th>Author Score <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="1 point per paper is divided equally amoung the authors of the paper"></th>
+    <th>Affiliation Score <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="1 point per paper is divided equally amoung the authors affiliations of the paper"></th>
   </tr>
   <% @papers_authors_affiliations.each do |paa| %>
     <tr>
       <td><%= paa.paper.conference_abbrv %></td>
-      <td><%= paa.paper.title %></td>
-      <td><%= paa.author.name %></td>
+      <td><%= paa.paper.publish_year %></td>
+      <td><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="<%= paa.paper.title %>"></span> <%= paa.paper.paper_id %></td>
+      <td><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="<%= paa.author.name %>"></span> <%= paa.author.author_id %></td>
       <td><%= paa.affiliation.name %></td>
-      <td>?</td>
+      <td><%= paa.author_score %></td>
+      <td><%= paa.affiliation_score %></td>
     </tr>
   <% end %>
 </table>
