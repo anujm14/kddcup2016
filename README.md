@@ -24,7 +24,7 @@ Building Affiliations from https://s3.amazonaws.com/kddcup2016-ghen/Affiliations
 Building PapersAuthorsAffiliations from https://s3.amazonaws.com/kddcup2016-ghen/PapersAuthorsAffiliations.tsv: |=============|
 Scoring https://s3.amazonaws.com/kddcup2016-ghen/PapersAuthorsAffiliations.tsv: |=============================================|
 ```
-
+:note: Ignores Author names becuase who want to deal with 1GB of non-ascii characters... 
 Access the database to query with SQL:
 
 ```
