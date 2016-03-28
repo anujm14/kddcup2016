@@ -6,7 +6,7 @@ This repository contains some publicly available resources for analyzing and int
 
 # KDDB: Ruby on Rails Application for Select KDD data
 
-:warn: Live Demo: http://kdddb.fu2igtbxwf.us-east-1.elasticbeanstalk.com/welcome/index :warn:
+:warning: Live Demo: http://kdddb.fu2igtbxwf.us-east-1.elasticbeanstalk.com/welcome/index :warning:
 
 Using Ruby on Rails and Postgres, this application running on AWS Elastic Beanstalk allows you to view the Author and Affiliation scores our team computed for each Paper, Author, Affiliation combination of interest.
 
