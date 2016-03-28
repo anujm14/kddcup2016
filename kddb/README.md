@@ -6,7 +6,7 @@ This repository contains some publicly available resources for analyzing and int
 
 # KDDB: Ruby on Rails Application for Select KDD data
 
-:warn: Live Demo: http://kdddb.fu2igtbxwf.us-east-1.elasticbeanstalk.com/welcome/index :warn:
+:warning: Live Demo: http://kdddb.fu2igtbxwf.us-east-1.elasticbeanstalk.com/welcome/index :warning:
 
 Using Ruby on Rails and Postgres, this application running on AWS Elastic Beanstalk allows you to view the Author and Affiliation scores our team computed for each Paper, Author, Affiliation combination of interest.
 
@@ -24,7 +24,7 @@ Building Affiliations from https://s3.amazonaws.com/kddcup2016-ghen/Affiliations
 Building PapersAuthorsAffiliations from https://s3.amazonaws.com/kddcup2016-ghen/PapersAuthorsAffiliations.tsv: |=============|
 Scoring https://s3.amazonaws.com/kddcup2016-ghen/PapersAuthorsAffiliations.tsv: |=============================================|
 ```
-
+:note: Ignores Author names becuase who want to deal with 1GB of non-ascii characters...
 Access the database to query with SQL:
 
 ```
@@ -37,4 +37,9 @@ Use the Rails API to build views or use Ruby:
 bundle exec rails server
 ```
 
-Then go to: http://localhost:3000/welcome/index. 
+Then go to: http://localhost:3000/welcome/index.
+
+
+# Phase 1
+
+That directory holds some scripts used to clean the data for Phase 1
