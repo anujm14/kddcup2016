@@ -1,0 +1,17 @@
+<%= form_for(@conferences_affiliation) do |f| %>
+  <% if @conferences_affiliation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@conferences_affiliation.errors.count, "error") %> prohibited this conferences_affiliation from being saved:</h2>
+
+      <ul>
+      <% @conferences_affiliation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
