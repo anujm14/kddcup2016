@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327045807) do
+ActiveRecord::Schema.define(version: 20160401015655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,19 @@ ActiveRecord::Schema.define(version: 20160327045807) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "conferences_affiliations", force: :cascade do |t|
+    t.string   "conference_id"
+    t.string   "affiliation_id"
+    t.integer  "year"
+    t.integer  "acceptance_count",         default: 0
+    t.decimal  "author_scores",            default: 0.0
+    t.decimal  "author_scores_prime",      default: 0.0
+    t.decimal  "affiliation_scores",       default: 0.0
+    t.decimal  "affiliation_scores_prime", default: 0.0
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "papers", force: :cascade do |t|

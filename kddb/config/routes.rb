@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :conferences_affiliations
   get 'welcome/index'
 
   resources :authors
