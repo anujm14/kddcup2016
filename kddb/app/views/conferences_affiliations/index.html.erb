@@ -2,24 +2,48 @@
 
 <h1>Listing Conferences Affiliations</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @conferences_affiliations.each do |conferences_affiliation| %>
-      <tr>
-        <td><%= link_to 'Show', conferences_affiliation %></td>
-        <td><%= link_to 'Edit', edit_conferences_affiliation_path(conferences_affiliation) %></td>
-        <td><%= link_to 'Destroy', conferences_affiliation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <br>
+<div class="panel panel-default">
+  <div class="panel-body">
+<script>
+$(document).ready(function(){
+    $('#dataTable').dataTable({
+        "paging":   true,
+        "ordering": true,
+        "info":     false });
+});
 
-<%= link_to 'New Conferences affiliation', new_conferences_affiliation_path %>
+</script>
+<div class="alert alert-warning" role="alert"><strong>KDD Cup 2016</strong> Team Titans</div>
+<div id='chart'></div>
+<%= render_chart(@chart, 'chart') %>
+<table id="dataTable"  class="display">
+  <thead>
+  <tr>
+    <th>Conference</th>
+    <th>Affiliation</th>
+    <th>Year</th>
+    <th>Author Scores <i class="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="The sum of scores earned by all affiliation's authors at a conference in a given year"></i></th>
+    <th>Author Scores Prime <i class="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="The change in the sum of scores earned by all affiliation's authors at a conference from the previous year"></i></th>
+    <th>Affiliation Scores <i class="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="The sum of scores earned by an affiliation at a conference in a given year"></th>
+    <th>Affiliation Scores Prime <i class="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="The change in the sum of scores earned by an affiliation at a conference from the previous year "></th>
+    <th>Acceptance Count <i class="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="The number of papers each affiliation assisted with"></th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @conferences_affiliations.each do |ca| %>
+    <tr>
+      <td><%= ca.conference_id %></td>
+      <td><%= ca.affiliation_id %></td>
+      <td><%= ca.year %></td>
+      <td><%= ca.author_scores %></td>
+      <td><%= ca.author_scores_prime %></td>
+      <td><%= ca.affiliation_scores %></td>
+      <td><%= ca.affiliation_scores_prime %></td>
+      <td><%= ca.acceptance_count %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+</div>
+</div>

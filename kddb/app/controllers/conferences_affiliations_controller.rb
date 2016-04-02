@@ -5,6 +5,22 @@ class ConferencesAffiliationsController < ApplicationController
   # GET /conferences_affiliations.json
   def index
     @conferences_affiliations = ConferencesAffiliation.all
+    data_table = GoogleVisualr::DataTable.new
+
+    # Add Column Headers
+    data_table.new_column('string', 'Year' )
+    data_table.new_column('number', 'Author Scores')
+    data_table.new_column('number', 'Affiliation Scores')
+    warn "about to select"
+    ConferencesAffiliation.where(affiliation_id: '4CE6FC2D', conference_id: '43FD776C').order(:year).each do |ca|
+      warn [ca.year.to_s, ca.author_scores, ca.affiliation_scores]
+      data_table.add_row([ca.year.to_s, ca.author_scores, ca.affiliation_scores])
+    end
+
+    option = { width: 400, height: 240, title: 'Affiliation Performance', isStacked: true }
+    @chart = GoogleVisualr::Interactive::AreaChart.new(data_table, option)
+
+
   end
 
   # GET /conferences_affiliations/1
